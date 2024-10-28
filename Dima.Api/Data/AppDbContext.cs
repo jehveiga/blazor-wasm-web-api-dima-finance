@@ -6,8 +6,8 @@ namespace Dima.Api.Data
 {
     public class AppDbContext(DbContextOptions options) : DbContext(options)
     {
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Transaction> Transactions { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
