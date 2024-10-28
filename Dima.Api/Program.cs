@@ -36,5 +36,10 @@ public class Request
 }
 
 // Response
+public class Response
+{
+    public long Id { get; set; }
+    public string Title { get; set; }
+}
 
 // Handler
