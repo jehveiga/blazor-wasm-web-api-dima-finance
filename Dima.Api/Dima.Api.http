@@ -1,6 +1,6 @@
 @Dima.Api_HostAddress = http://localhost:5089
 
-GET {{Dima.Api_HostAddress}}/weatherforecast/
+GET {{Dima.Api_HostAddress}}/transactions/
 Accept: application/json
 
 ###
