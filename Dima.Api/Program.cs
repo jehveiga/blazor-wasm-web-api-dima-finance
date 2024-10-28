@@ -17,10 +17,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapGet(pattern: "/v1/transactions", handler: () =>
+app.MapPost(pattern: "/v1/transactions", handler: () =>
 {
 
-});
+})
+.WithName("Transactions: Create")
+.WithSummary("Cria uma nova transação")
+.Produces<Response>();
 
 app.Run();
 
