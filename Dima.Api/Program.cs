@@ -1,4 +1,5 @@
 using Dima.Api.Data;
+using Dima.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -25,12 +26,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapPost(pattern: "/v1/transactions", handler: (Request request, Handler handler) =>
+app.MapPost(pattern: "/v1/categories", handler: (Request request, Handler handler) =>
 {
     return handler.Handle(request);
 })
-.WithName("Transactions: Create")
-.WithSummary("Cria uma nova transação")
+.WithName("Categories: Create")
+.WithSummary("Cria uma nova categoria")
 .Produces<Response>();
 
 app.Run();
@@ -39,11 +40,7 @@ app.Run();
 public class Request
 {
     public string Title { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public int Type { get; set; }
-    public decimal Amount { get; set; }
-    public long CategoryId { get; set; }
-    public string UserId { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 }
 
 // Response
@@ -54,12 +51,22 @@ public class Response
 }
 
 // Handler
-public class Handler
+public class Handler(AppDbContext dbContext)
 {
-    public Response Handle(Request request) =>
-        new()
+    public Response Handle(Request request)
+    {
+        Category category = new()
         {
-            Id = 4,
             Title = request.Title,
+            Description = request.Description
         };
+        dbContext.Categories.Add(category);
+        dbContext.SaveChanges();
+
+        return new Response
+        {
+            Id = category.Id,
+            Title = category.Title
+        };
+    }
 }
