@@ -17,9 +17,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapPost(pattern: "/v1/transactions", handler: () =>
+app.MapPost(pattern: "/v1/transactions", handler: (Request request, Handler handler) =>
 {
-
+    handler.Handle(request);
 })
 .WithName("Transactions: Create")
 .WithSummary("Cria uma nova transação")
@@ -46,3 +46,12 @@ public class Response
 }
 
 // Handler
+public class Handler
+{
+    public Response Handle(Request request) =>
+        new()
+        {
+            Id = 4,
+            Title = request.Title,
+        };
+}
