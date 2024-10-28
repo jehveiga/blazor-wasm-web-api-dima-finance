@@ -1,9 +1,10 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setupAction: x => x.CustomSchemaIds(n => n.FullName));
+
+builder.Services.AddTransient<Handler>();
 
 WebApplication app = builder.Build();
 
@@ -19,7 +20,7 @@ app.UseHttpsRedirection();
 
 app.MapPost(pattern: "/v1/transactions", handler: (Request request, Handler handler) =>
 {
-    handler.Handle(request);
+    return handler.Handle(request);
 })
 .WithName("Transactions: Create")
 .WithSummary("Cria uma nova transação")
@@ -42,7 +43,7 @@ public class Request
 public class Response
 {
     public long Id { get; set; }
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 }
 
 // Handler
