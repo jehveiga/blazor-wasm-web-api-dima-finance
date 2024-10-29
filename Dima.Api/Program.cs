@@ -1,5 +1,7 @@
 using Dima.Api.Data;
 using Dima.Core.Models;
+using Dima.Core.Requests.Categories;
+using Dima.Core.Responses;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -26,34 +28,21 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapPost(pattern: "/v1/categories", handler: (Request request, Handler handler) =>
+app.MapPost(pattern: "/v1/categories", handler: (CreateCategoryRequest request, Handler handler) =>
 {
     return handler.Handle(request);
 })
 .WithName("Categories: Create")
 .WithSummary("Cria uma nova categoria")
-.Produces<Response>();
+.Produces<Response<Category>>();
 
 app.Run();
 
-// Request
-public class Request
-{
-    public string Title { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-}
-
-// Response
-public class Response
-{
-    public long Id { get; set; }
-    public string Title { get; set; } = string.Empty;
-}
 
 // Handler
 public class Handler(AppDbContext dbContext)
 {
-    public Response Handle(Request request)
+    public Response<Category> Handle(CreateCategoryRequest request)
     {
         Category category = new()
         {
@@ -63,10 +52,9 @@ public class Handler(AppDbContext dbContext)
         dbContext.Categories.Add(category);
         dbContext.SaveChanges();
 
-        return new Response
+        return new Response<Category>
         {
-            Id = category.Id,
-            Title = category.Title
+            Data = category
         };
     }
 }
