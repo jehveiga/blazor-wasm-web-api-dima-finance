@@ -2,7 +2,7 @@
 
 namespace Dima.Core.Responses
 {
-    public class PagedResponse<TData> : Response<TData> where TData : class
+    public class PagedResponse<TData> : Response<TData>
     {
         [JsonConstructor]
         public PagedResponse(

@@ -2,7 +2,7 @@
 
 namespace Dima.Core.Responses
 {
-    public class Response<TData> where TData : class
+    public class Response<TData>
     {
 
         private readonly int _code;
@@ -15,7 +15,7 @@ namespace Dima.Core.Responses
         public Response(
             TData? data,
             int code = Configurations.DEFAULT_STATUS_CODE,
-            string? message = null)
+            string? message = default)
         {
             Data = data;
             Message = message;
