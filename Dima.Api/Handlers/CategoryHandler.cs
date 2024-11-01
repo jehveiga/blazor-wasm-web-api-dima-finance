@@ -74,7 +74,7 @@ namespace Dima.Api.Handlers
             }
         }
 
-        public async Task<Response<Category?>> UpdateAsync(UpdateCategoryRequest updateRequest)
+        public async Task<Response<Category?>> UpdateAsync(DeteteCategoryRequest updateRequest)
         {
             try
             {
