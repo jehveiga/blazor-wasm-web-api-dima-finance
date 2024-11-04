@@ -127,8 +127,9 @@ namespace Dima.Api.Handlers
                                                                 t.UserId == request.UserId)
                                                     .OrderBy(t => t.CreatedAt);
 
-                List<Transaction> transactions = await query.Skip(((request.PageNumber - 1) * request.PageSize))
-                                                            .Take(request.PageSize)
+                int skip = ((request.PageNumber - 1) * request.PageSize);
+                int take = request.PageSize;
+                List<Transaction> transactions = await query.Take(skip..take)
                                                             .ToListAsync();
 
                 int count = await query.CountAsync();

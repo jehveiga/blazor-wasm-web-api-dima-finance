@@ -17,8 +17,9 @@ namespace Dima.Api.Handlers
                                                  .Where(c => c.UserId == getAllRequest.UserId)
                                                  .OrderBy(c => c.Title);
 
-                List<Category> categoriesDb = await query.Skip(((getAllRequest.PageNumber - 1) * getAllRequest.PageSize))
-                                                         .Take(getAllRequest.PageSize)
+                int skip = ((getAllRequest.PageNumber - 1) * getAllRequest.PageSize);
+                int take = getAllRequest.PageSize;
+                List<Category> categoriesDb = await query.Take(skip..take)
                                                          .ToListAsync();
 
                 int count = await query.CountAsync();
