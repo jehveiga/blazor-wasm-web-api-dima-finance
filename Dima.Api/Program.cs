@@ -50,7 +50,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGet(pattern: "/", handler: () => new { message = "Ok" });
 app.MapEndpoints();
+app.MapGroup(prefix: "v1/identity")
+    .WithTags("Identity")
+    .MapIdentityApi<User>();
 
 #endregion
 
