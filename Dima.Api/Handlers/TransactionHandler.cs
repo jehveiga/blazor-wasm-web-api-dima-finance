@@ -129,7 +129,8 @@ namespace Dima.Api.Handlers
 
                 int skip = ((request.PageNumber - 1) * request.PageSize);
                 int take = request.PageSize;
-                List<Transaction> transactions = await query.Take(skip..take)
+                List<Transaction> transactions = await query.Skip(skip)
+                                                            .Take(take)
                                                             .ToListAsync();
 
                 int count = await query.CountAsync();

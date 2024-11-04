@@ -5,6 +5,7 @@ using Dima.Api.Models;
 using Dima.Core.Handlers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,38 @@ app.MapEndpoints();
 app.MapGroup(prefix: "v1/identity")
     .WithTags("Identity")
     .MapIdentityApi<User>();
+
+app.MapGroup(prefix: "v1/identity")
+   .WithTags("Identity")
+   .MapPost(pattern: "/logout", handler: async (
+       SignInManager<User> signInManager) =>
+   {
+       await signInManager.SignOutAsync();
+       return Results.Ok();
+   })
+   .RequireAuthorization();
+
+app.MapGroup(prefix: "v1/identity")
+   .WithTags("Identity")
+   .MapPost(pattern: "/roles", handler: (
+       ClaimsPrincipal user) =>
+   {
+       if (user.Identity is null || !user.Identity.IsAuthenticated)
+           return Results.Unauthorized();
+
+       ClaimsIdentity identity = (ClaimsIdentity)user.Identity;
+       var roles = identity.FindAll(identity.RoleClaimType)
+                                          .Select(c => new
+                                          {
+                                              c.Issuer,
+                                              c.OriginalIssuer,
+                                              c.Type,
+                                              c.Value,
+                                              c.ValueType
+                                          });
+       return TypedResults.Json(roles);
+   })
+   .RequireAuthorization();
 
 #endregion
 
