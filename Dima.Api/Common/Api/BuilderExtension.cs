@@ -44,7 +44,19 @@ namespace Dima.Api.Common.Api
 
         public static void AddCrossOrigin(this WebApplicationBuilder builder)
         {
-
+            // Habilitando o serviço no container de Cors para permitir que o serviço Blazor Web consuma a API
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: ApiConfiguration.CORS_POLICY_NAME,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins(Configurations.BACKEND_URL,
+                                                         Configurations.FRONTEND_URL)
+                                            .AllowAnyMethod()
+                                            .AllowAnyHeader()
+                                            .AllowCredentials();
+                                  });
+            });
         }
 
         public static void AddServices(this WebApplicationBuilder builder)

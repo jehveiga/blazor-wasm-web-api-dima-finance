@@ -1,3 +1,4 @@
+using Dima.Api;
 using Dima.Api.Common.Api;
 using Dima.Api.Endpoints;
 
@@ -23,6 +24,7 @@ WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 
+app.UseCors(ApiConfiguration.CORS_POLICY_NAME);
 app.UseSecurity();
 app.MapEndpoints();
 app.UseHttpsRedirection();
