@@ -1,4 +1,5 @@
 using Dima.Web;
+using Dima.Web.Security;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -6,6 +7,8 @@ using MudBlazor.Services;
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddScoped<CookieHandler>();
 
 builder.Services.AddMudServices();
 
