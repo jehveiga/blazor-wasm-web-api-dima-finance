@@ -7,18 +7,28 @@
     Theme="ConfigurationHelpers.Theme"/>
 <MudSnackbarProvider />
 
-<MudLayout>
-    <MudAppBar>
-        Dima
-        <MudSpacer/>
-        <MudSwitch @bind-Value="@_isDarkMode" />
-    </MudAppBar>
-    <MudMainContent>
-        <MudContainer>
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+<AuthorizeView>
+    <Authorized>
+        <MudLayout>
+            <MudAppBar>
+                Dima
+                <MudSpacer />
+                <MudText>
+                    @context.User.Identity?.Name
+                </MudText>
+                <MudSwitch @bind-Value="@_isDarkMode" />
+            </MudAppBar>
+            <MudMainContent>
+                <MudContainer>
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </MudLayout>
+    </Authorized>
+    <NotAuthorized>
+        <LoginRedirect />
+    </NotAuthorized>
+</AuthorizeView>
 
 @code{
     // Implementando obter o tema pelo sistema operacional e pela preferencia

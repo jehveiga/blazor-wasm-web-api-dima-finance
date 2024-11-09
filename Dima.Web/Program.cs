@@ -1,4 +1,6 @@
+using Dima.Core.Handlers;
 using Dima.Web;
+using Dima.Web.Handlers;
 using Dima.Web.Security;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -25,5 +27,7 @@ builder.Services.AddHttpClient(ConfigurationHelpers.HTTPCLIENT_NAME, static opti
 {
     options.BaseAddress = new Uri(uriString: ConfigurationHelpers.BackendUrl);
 }).AddHttpMessageHandler<CookieHandler>();
+
+builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 
 await builder.Build().RunAsync();
