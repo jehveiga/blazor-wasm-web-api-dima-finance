@@ -11,13 +11,27 @@
     <Authorized>
         <MudLayout>
             <MudAppBar>
+                <MudIconButton 
+                    Icon="@Icons.Material.Filled.Menu"
+                    Color="Color.Inherit" 
+                    Edge="Edge.Start"
+                    OnClick="ToggleDrawer" />
                 Dima
                 <MudSpacer />
-                <MudText>
+                <MudText Typo="Typo.caption">
                     @context.User.Identity?.Name
                 </MudText>
-                <MudSwitch @bind-Value="@_isDarkMode" />
+                <MudSwitch 
+                    Color="Color.Inherit"
+                    @bind-Value="@_isDarkMode"
+                    T="bool"
+                    Class="ma-4" 
+                    ThumbIcon="@Icons.Material.TwoTone.Lightbulb" />
             </MudAppBar>
+
+            <MudDrawer @bind-Open="@_isDrawerOpened">
+                <h3>Nav Menu</h3>
+            </MudDrawer>
             <MudMainContent>
                 <MudContainer>
                     @Body
@@ -32,6 +46,7 @@
 
 @code{
     // Implementando obter o tema pelo sistema operacional e pela preferencia
+    private bool _isDrawerOpened = true;
     private bool _isDarkMode = true;
     private MudThemeProvider _mudThemeProvider = null!;
 
@@ -51,4 +66,8 @@
         StateHasChanged(); // Avisa ao blazor que teve alteração na tela
         return Task.CompletedTask;
     }
+
+    private void ToggleDrawer() =>
+        _isDrawerOpened = !_isDrawerOpened;
+
 }
