@@ -9,7 +9,7 @@ using MudBlazor.Services;
 
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-ConfigurationHelpers.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
+Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -23,11 +23,13 @@ builder.Services.AddScoped(static x => (ICookieAuthenticationStateProvider)x.Get
 
 builder.Services.AddMudServices();
 
-builder.Services.AddHttpClient(ConfigurationHelpers.HTTPCLIENT_NAME, static options =>
+builder.Services.AddHttpClient(Configuration.HTTPCLIENT_NAME, static options =>
 {
-    options.BaseAddress = new Uri(uriString: ConfigurationHelpers.BackendUrl);
+    options.BaseAddress = new Uri(uriString: Configuration.BackendUrl);
 }).AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
+builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();
+builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();
 
 await builder.Build().RunAsync();

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Dima.Core.Requests.Categories
 {
-    public class DeteteCategoryRequest : Request
+    public class UpdateCategoryRequest : Request
     {
         [JsonIgnore]
         public long Id { get; set; }

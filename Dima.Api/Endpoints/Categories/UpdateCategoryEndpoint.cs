@@ -21,7 +21,7 @@ namespace Dima.Api.Endpoints.Categories
         private static async Task<IResult> HandleAsync(
             ClaimsPrincipal user,
             [FromRoute] long id,
-            [FromBody] DeteteCategoryRequest request,
+            [FromBody] UpdateCategoryRequest request,
             [FromServices] ICategoryHandler handler)
         {
             request.UserId = user.Identity?.Name ?? string.Empty;

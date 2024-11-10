@@ -3,7 +3,7 @@ using MudBlazor.Utilities;
 
 namespace Dima.Web
 {
-    internal static class ConfigurationHelpers
+    internal static class Configuration
     {
         public const string HTTPCLIENT_NAME = "dima";
 
@@ -26,9 +26,9 @@ namespace Dima.Web
                 AppbarBackground = new MudColor("#1EFA2D"),
                 AppbarText = Colors.Shades.Black,
                 TextPrimary = Colors.Shades.Black,
-                PrimaryContrastText = Colors.Shades.Black,
-                DrawerText = Colors.Shades.Black,
-                DrawerBackground = Colors.LightGreen.Lighten4
+                PrimaryContrastText = new MudColor("000000"),
+                DrawerText = Colors.Shades.White,
+                DrawerBackground = Colors.Green.Darken4
             },
             PaletteDark = new PaletteDark
             {
@@ -36,6 +36,7 @@ namespace Dima.Web
                 Secondary = Colors.LightGreen.Darken3,
                 AppbarBackground = Colors.LightGreen.Accent3,
                 AppbarText = Colors.Shades.Black,
+                PrimaryContrastText = new MudColor("000000")
             }
         };
     }
