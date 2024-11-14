@@ -33,7 +33,7 @@ namespace Dima.Api.Endpoints.Categories
             };
 
             PagedResponse<List<Category>?> result = await handler.GetAllAsync(request);
-            return result.IsSucess ? TypedResults.Ok(result)
+            return result.IsSuccess ? TypedResults.Ok(result)
                                    : TypedResults.BadRequest(result);
         }
     }

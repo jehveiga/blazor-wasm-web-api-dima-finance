@@ -27,7 +27,7 @@ namespace Dima.Api.Endpoints.Categories
             request.UserId = user.Identity?.Name ?? string.Empty;
             request.Id = id;
             Response<Category?> result = await handler.UpdateAsync(request);
-            return result.IsSucess ? TypedResults.Ok(result)
+            return result.IsSuccess ? TypedResults.Ok(result)
                                    : TypedResults.BadRequest(result);
         }
     }

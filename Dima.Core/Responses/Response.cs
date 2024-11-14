@@ -4,13 +4,11 @@ namespace Dima.Core.Responses
 {
     public class Response<TData>
     {
-
         private readonly int _code;
 
         [JsonConstructor]
         public Response() =>
             _code = Configurations.DEFAULT_STATUS_CODE;
-
 
         public Response(
             TData? data,
@@ -26,7 +24,7 @@ namespace Dima.Core.Responses
         public string? Message { get; set; }
 
         [JsonIgnore]
-        public bool IsSucess =>
+        public bool IsSuccess =>
             _code is >= 200 and <= 299;
     }
 }

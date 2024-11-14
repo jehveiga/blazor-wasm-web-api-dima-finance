@@ -5,6 +5,7 @@ using Dima.Api.Endpoints;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 #region Container de serviços
+
 // Add services to the container.
 builder.AddConfiguration();
 builder.Services.AddProblemDetails();
@@ -14,7 +15,7 @@ builder.AddCrossOrigin();
 builder.AddDocumentation();
 builder.AddServices();
 
-#endregion
+#endregion Container de serviços
 
 WebApplication app = builder.Build();
 
@@ -29,6 +30,6 @@ app.UseSecurity();
 app.MapEndpoints();
 app.UseHttpsRedirection();
 
-#endregion
+#endregion Pipeline da Requisição
 
 await app.RunAsync();

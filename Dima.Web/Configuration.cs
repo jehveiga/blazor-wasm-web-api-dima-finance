@@ -9,7 +9,7 @@ namespace Dima.Web
 
         public static string BackendUrl { get; set; } = string.Empty;
 
-        public readonly static MudTheme Theme = new()
+        public static readonly MudTheme Theme = new()
         {
             Typography = new Typography
             {

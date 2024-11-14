@@ -11,7 +11,7 @@ public class IdentityUserMapping : IEntityTypeConfiguration<User>
     {
         builder.ToTable("IdentityUser");
         builder.HasKey(u => u.Id);
-        
+
         builder.HasIndex(u => u.NormalizedUserName).IsUnique();
         builder.HasIndex(u => u.NormalizedEmail).IsUnique();
 

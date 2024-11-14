@@ -35,7 +35,7 @@ namespace Dima.Api.Endpoints.Transactions
             };
 
             PagedResponse<List<Transaction>?> result = await handler.GetByPeriodAsync(request);
-            return result.IsSucess ? TypedResults.Ok(result)
+            return result.IsSuccess ? TypedResults.Ok(result)
                                    : TypedResults.BadRequest(result);
         }
     }

@@ -97,7 +97,6 @@ namespace Dima.Api.Handlers
             {
                 return new Response<Category?>(default, 500, "Não foi possível alterar a categoria");
             }
-
         }
 
         public async Task<Response<Category?>> DeleteAsync(DeleteCategoryRequest deleteRequest)
@@ -120,7 +119,5 @@ namespace Dima.Api.Handlers
                 return new Response<Category?>(default, code: 500, message: "Não foi possível excluir a categoria referida");
             }
         }
-
-
     }
 }

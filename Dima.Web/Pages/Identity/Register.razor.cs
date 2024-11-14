@@ -25,7 +25,7 @@ namespace Dima.Web.Pages.Identity
         [Inject]
         public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
 
-        #endregion
+        #endregion Dependencies
 
         #region Properties
 
@@ -33,9 +33,10 @@ namespace Dima.Web.Pages.Identity
 
         public RegisterRequest InputModel { get; set; } = new();
 
-        #endregion
+        #endregion Properties
 
         #region Override
+
         protected override async Task OnInitializedAsync()
         {
             AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -44,7 +45,8 @@ namespace Dima.Web.Pages.Identity
             if (user.Identity is { IsAuthenticated: true })
                 NavigationManager.NavigateTo("/");
         }
-        #endregion
+
+        #endregion Override
 
         #region Methods
 
@@ -56,7 +58,7 @@ namespace Dima.Web.Pages.Identity
             {
                 Response<string> result = await Handler.RegisterAsync(InputModel);
 
-                if (result.IsSucess)
+                if (result.IsSuccess)
                 {
                     Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
                     NavigationManager.NavigateTo("/login");
@@ -67,7 +69,6 @@ namespace Dima.Web.Pages.Identity
             catch (Exception ex)
             {
                 Snackbar.Add(ex.Message ?? string.Empty, Severity.Error);
-
             }
             finally
             {
@@ -75,6 +76,6 @@ namespace Dima.Web.Pages.Identity
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

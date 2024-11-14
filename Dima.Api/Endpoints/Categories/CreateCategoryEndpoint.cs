@@ -26,9 +26,8 @@ namespace Dima.Api.Endpoints.Categories
             request.UserId = user.Identity?.Name ?? string.Empty;
 
             Response<Category?> result = await handler.CreateAsync(request);
-            return result.IsSucess ? TypedResults.Created($"/{result.Data?.Id}", result)
+            return result.IsSuccess ? TypedResults.Created($"/{result.Data?.Id}", result)
                                    : TypedResults.BadRequest(result);
         }
-
     }
 }

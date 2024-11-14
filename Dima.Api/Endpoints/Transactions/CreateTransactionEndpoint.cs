@@ -24,7 +24,7 @@ namespace Dima.Api.Endpoints.Transactions
             request.UserId = "teste@veiga.io";
 
             Response<Transaction?> result = await handler.CreateAsync(request);
-            return result.IsSucess ? TypedResults.Created($"/{result.Data?.Id}", result)
+            return result.IsSuccess ? TypedResults.Created($"/{result.Data?.Id}", result)
                                    : TypedResults.BadRequest(result);
         }
     }

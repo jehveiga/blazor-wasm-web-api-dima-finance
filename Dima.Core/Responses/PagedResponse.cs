@@ -23,10 +23,10 @@ namespace Dima.Core.Responses
             string? message = null)
             : base(data, code, message)
         {
-
         }
 
         public int CurrentPage { get; set; } = 1;
+
         public int TotalPages
         {
             get

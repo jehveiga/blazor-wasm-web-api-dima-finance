@@ -28,7 +28,7 @@ namespace Dima.Api.Endpoints.Transactions
             };
 
             Response<Transaction?> result = await handler.GetByIdAsync(request);
-            return result.IsSucess ? TypedResults.Ok(result)
+            return result.IsSuccess ? TypedResults.Ok(result)
                                    : TypedResults.BadRequest(result);
         }
     }

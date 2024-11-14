@@ -30,7 +30,7 @@ namespace Dima.Api.Endpoints.Categories
             };
 
             Response<Category?> result = await handler.DeleteAsync(request);
-            return result.IsSucess ? TypedResults.Ok(result)
+            return result.IsSuccess ? TypedResults.Ok(result)
                                    : TypedResults.BadRequest(result);
         }
     }

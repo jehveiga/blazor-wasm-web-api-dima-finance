@@ -23,14 +23,14 @@ public partial class LoginPage : ComponentBase
     [Inject]
     public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
 
-    #endregion
+    #endregion Services
 
     #region Properties
 
     public bool IsBusy { get; set; } = false;
     public LoginRequest InputModel { get; set; } = new();
 
-    #endregion
+    #endregion Properties
 
     #region Overrides
 
@@ -43,7 +43,7 @@ public partial class LoginPage : ComponentBase
             NavigationManager.NavigateTo("/");
     }
 
-    #endregion
+    #endregion Overrides
 
     #region Methods
 
@@ -55,7 +55,7 @@ public partial class LoginPage : ComponentBase
         {
             Response<string> result = await Handler.LoginAsync(InputModel);
 
-            if (result.IsSucess)
+            if (result.IsSuccess)
             {
                 await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 AuthenticationStateProvider.NotifyAuthenticationStateChanged();
@@ -74,5 +74,5 @@ public partial class LoginPage : ComponentBase
         }
     }
 
-    #endregion
+    #endregion Methods
 }

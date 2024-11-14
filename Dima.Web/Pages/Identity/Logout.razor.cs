@@ -21,7 +21,7 @@ public partial class LogoutPage : ComponentBase
     [Inject]
     public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
 
-    #endregion
+    #endregion Services
 
     #region Overrides
 
@@ -37,5 +37,5 @@ public partial class LogoutPage : ComponentBase
         await base.OnInitializedAsync();
     }
 
-    #endregion
+    #endregion Overrides
 }

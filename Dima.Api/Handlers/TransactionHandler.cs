@@ -12,6 +12,9 @@ namespace Dima.Api.Handlers
     {
         public async Task<Response<Transaction?>> CreateAsync(CreateTransactionRequest request)
         {
+            if (request is { Type: Core.Enums.ETransactionType.Withdraw, Amount: >= 0 })
+                request.Amount *= -1;
+
             try
             {
                 Transaction transaction = new()
@@ -122,10 +125,10 @@ namespace Dima.Api.Handlers
                 IQueryable<Transaction> query = dbContext
                                                     .Transactions
                                                     .AsNoTracking()
-                                                    .Where(t => t.CreatedAt >= request.StartDate &&
-                                                                t.CreatedAt <= request.EndDate &&
+                                                    .Where(t => t.PaidOrReceivedAt >= request.StartDate &&
+                                                                t.PaidOrReceivedAt <= request.EndDate &&
                                                                 t.UserId == request.UserId)
-                                                    .OrderBy(t => t.CreatedAt);
+                                                    .OrderBy(t => t.PaidOrReceivedAt);
 
                 int skip = ((request.PageNumber - 1) * request.PageSize);
                 int take = request.PageSize;
