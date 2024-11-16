@@ -14,6 +14,7 @@ public partial class IncomesAndExpensesChartComponent : ComponentBase
     public ChartOptions Options { get; set; } = new();
     public List<ChartSeries>? Series { get; set; }
     public List<string> Labels { get; set; } = [];
+    public int Index { get; set; } = -1; //default value cannot be 0 -> first selectedindex is 0.
 
     #endregion Properties
 
@@ -57,8 +58,8 @@ public partial class IncomesAndExpensesChartComponent : ComponentBase
 
             Series =
                     [
-                        new ChartSeries { Name = "Receitas", Data = incomes.ToArray() },
-                        new ChartSeries { Name = "Saídas", Data = expenses.ToArray() }
+                        new ChartSeries { Name = "Receitas", Data = [.. incomes] },
+                        new ChartSeries { Name = "Saídas", Data = [.. expenses] }
                     ];
         }
         catch (Exception ex)
