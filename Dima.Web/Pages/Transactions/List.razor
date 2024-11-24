@@ -28,36 +28,41 @@
             </MudSelectItem>
         }
     </MudSelect>
-    <MudSpacer/>
-    <MudButton
-        Size="Size.Small"
-        Variant="Variant.Filled"
-        Color="Color.Primary"
-        StartIcon="@Icons.Material.TwoTone.Search"
-        OnClick="OnSearchAsync">
+    <MudSpacer />
+    <MudButton Size="Size.Small"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.TwoTone.Search"
+               OnClick="OnSearchAsync"
+               Class="mr-4">
         PESQUISAR
+    </MudButton>
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.TwoTone.Add"
+               Href="/lancamentos/novo">
+        NOVO LANÇAMENTO
     </MudButton>
 </div>
 
-<MudDataGrid
-    Items="@Transactions"
-    Filterable="false"
-    QuickFilter="Filter"
-    Hideable="true"
-    ColumnResizeMode="ResizeMode.Column">
+<MudDataGrid Items="@Transactions"
+             Filterable="false"
+             QuickFilter="Filter"
+             Hideable="true"
+             ColumnResizeMode="ResizeMode.Column">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Lançamentos</MudText>
-        <MudSpacer/>
+        <MudSpacer />
         <MudTextField @bind-Value="SearchTerm"
                       Placeholder="Filtrar..."
                       Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search"
                       Immediate="true"
                       IconSize="Size.Medium"
-                      Class="mt-0"/>
+                      Class="mt-0" />
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Title" Title="Lançamento"/>
+        <PropertyColumn Property="x => x.Title" Title="Lançamento" />
         <TemplateColumn Title="Tipo" Filterable="true">
             <CellTemplate>
                 @if (context.Item.Type == ETransactionType.Deposit)
@@ -89,11 +94,10 @@
                                    Color="Color.Primary"
                                    Href="@($"/lancamentos/editar/{context.Item.Id}")">
                     </MudIconButton>
-                    <MudIconButton
-                        Icon="@Icons.Material.Filled.Delete"
-                        Color="Color.Error"
-                        aria-label="Exluir"
-                        OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   aria-label="Exluir"
+                                   OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
                     </MudIconButton>
                 </MudStack>
             </CellTemplate>
